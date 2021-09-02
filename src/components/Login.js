@@ -13,7 +13,7 @@ const Login = () => {
   const history = useHistory();
   const onSubmit = (data) => {
     console.log(data);
-    history.push("/");
+    history.push("/dashboard");
   };
   return (
     <div className="grid place-items-center h-screen w-screen">
