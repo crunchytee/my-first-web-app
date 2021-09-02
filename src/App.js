@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Welcome from "./components/Welcome";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/"></Route>
+        <Route path="/">
+          <Welcome />
+        </Route>
       </Switch>
     </Router>
   );
