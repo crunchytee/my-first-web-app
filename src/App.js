@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Welcome from "./components/Welcome";
 import React, { useState } from "react";
 import LoginContext from "./LoginContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -14,9 +15,10 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path="/dashboard">
+          {/* <Route path="/dashboard">
             <Dashboard />
-          </Route>
+          </Route> */}
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Route path="/login">
             <Login />
           </Route>
