@@ -4,9 +4,13 @@ module.exports = {
   theme: {
     backgroundColor: (theme) => ({
       primary: "white",
-      header: "#00B2CA",
+      button: "#00B2CA",
     }),
-    extend: {},
+    extend: {
+      textColor: {
+        button: "#00B2CA",
+      },
+    },
   },
   variants: {
     extend: {},
