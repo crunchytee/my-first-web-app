@@ -8,7 +8,9 @@ const Welcome = () => {
           This is the welcome page. Welcome to my page. I hope you like it here.{" "}
           <a className="underline text-blue-600">
             <Link to="/login">Log In</Link>
-          </a>{" "}
+          </a>
+        </h1>
+        <h1 className="block p-6">
           Looking for the{" "}
           <a className="underline text-blue-600">
             <Link to="/dashboard">Dashboard?</Link>
