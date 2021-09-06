@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import LoginContext from "./LoginContext";
+import LoginContext from "../LoginContext";
 
 const Login = () => {
   const USERNAME = /admin/;
   const PASWORD = /password/;
-  const [loginContext, setLoginContext] = useContext(LoginContext);
+  const { authenticated, setAuthenticated } = useContext(LoginContext);
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
     history.push("/dashboard");
-    setLoginContext({ authenticated: true });
+    setAuthenticated(true);
   };
   return (
     <div className="grid place-items-center h-screen w-screen">
