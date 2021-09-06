@@ -16,8 +16,8 @@ const Login = () => {
   const history = useHistory();
   const onSubmit = (data) => {
     console.log(data);
-    history.push("/dashboard");
     setAuthenticated(true);
+    history.push("/dashboard");
   };
   return (
     <div className="grid place-items-center h-screen w-screen">
@@ -72,7 +72,7 @@ const Login = () => {
         </label>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-36 my-4 rounded"
+          className="bg-button hover:bg-blue-700 text-white font-bold py-2 px-4 mx-36 my-4 rounded"
         >
           Submit
         </button>

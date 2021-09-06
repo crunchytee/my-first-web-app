@@ -15,9 +15,6 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          {/* <Route path="/dashboard">
-            <Dashboard />
-          </Route> */}
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Route path="/login">
             <Login />
