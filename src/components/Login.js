@@ -20,12 +20,12 @@ const Login = () => {
     history.push("/dashboard");
   };
   return (
-    <div className="grid place-items-center h-screen w-screen">
+    <div className="w-screen md:grid md:place-items-center">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="md:grid md:place-items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-fit-content"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="text-xl font-medium text-black p-6 block mx-36">
+        <div className="grid place-items-center text-xl font-medium text-black p-6">
           Log In
         </div>
         <label
@@ -35,7 +35,7 @@ const Login = () => {
           Username
           <input
             id="username"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-100% md:w-fit-content block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Username"
             {...register("username", {
               required: "Username required",
@@ -56,7 +56,7 @@ const Login = () => {
           Password
           <input
             id="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-100% md:w-fit-content block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Password"
             {...register("password", {
               required: "Password required",
@@ -72,7 +72,7 @@ const Login = () => {
         </label>
         <button
           type="submit"
-          className="bg-button hover:bg-blue-700 text-white font-bold py-2 px-4 mx-36 my-4 rounded"
+          className="bg-button w-100% md:w-auto hover:bg-buttonHover text-white font-bold py-2 px-4 my-4 rounded"
         >
           Submit
         </button>
