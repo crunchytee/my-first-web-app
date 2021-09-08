@@ -20,12 +20,12 @@ const Login = () => {
     history.push("/dashboard");
   };
   return (
-    <div className="w-screen md:grid md:place-items-center">
+    <div className="md:w-fit-content md:mx-auto">
       <form
-        className="md:grid md:place-items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-fit-content"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-fit-content"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="grid place-items-center text-xl font-medium text-black p-6">
+        <div className="w-fit-content mx-auto text-xl font-medium text-black p-6">
           Log In
         </div>
         <label
@@ -70,12 +70,14 @@ const Login = () => {
             <p className="text-red-500">{errors["password"].message}</p>
           )}
         </label>
-        <button
-          type="submit"
-          className="bg-button w-100% md:w-auto hover:bg-buttonHover text-white font-bold py-2 px-4 my-4 rounded"
-        >
-          Submit
-        </button>
+        <div className="mx-auto md:w-fit-content">
+          <button
+            type="submit"
+            className="bg-button w-100% hover:bg-buttonHover text-white font-bold py-2 px-4 my-4 rounded "
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
