@@ -10,8 +10,8 @@ const Dashboard = () => {
         "https://star-wars-character-search.glitch.me/api/characters"
       );
       const data = await response.json();
-      console.log(data);
-      setCharacters(data);
+      console.log(data.characters);
+      setCharacters(data.characters);
     };
     getChars();
   }, []);
@@ -23,10 +23,16 @@ const Dashboard = () => {
         <h2 className="block p-6">
           Authentication Status: {JSON.stringify(authenticated)}
         </h2>
-        <div className="grid grid-rows-3 grid-cols-auto">
-          {Object.values(characters).map((character, i) => (
+        <div className="grid grid-cols-3 grid-rows-auto divide-y-2 divide-black divide-solid border-2 border-black">
+          <div className="grid grid-cols-3 grid-rows-auto col-span-3 row-span-1">
+            <h2 className="">Name </h2>
+            <h2 className="">Eye Color</h2>
+            <h2 className="">Birth Year</h2>
+          </div>
+          {characters.map((character, i) => (
             <CharacterList
-              key={i}
+              className="w-min h-min"
+              key={character.id}
               name={character.name}
               eyeColor={character.eyeColor}
               birthYear={character.birthYear}
