@@ -16,6 +16,10 @@ const Login = () => {
   const history = useHistory();
   const onSubmit = (data) => {
     console.log(data);
+    fetch("http://127.0.0.1:5000/signup", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
     setAuthenticated(true);
     history.push("/dashboard");
   };
