@@ -1,19 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import LoginContext from "../LoginContext";
-import CharacterList from "./CharacterList";
+import UserList from "./UserList";
 
 const Dashboard = () => {
-  const [characters, setCharacters] = useState([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
-    const getChars = async () => {
-      const response = await fetch(
-        "https://star-wars-character-search.glitch.me/api/characters"
-      );
+    const getUsers = async () => {
+      const response = await fetch("http://127.0.0.1:5000/all");
       const data = await response.json();
-      console.log(data.characters);
-      setCharacters(data.characters);
+      console.log(data.users);
+      setUsers(data.users);
     };
-    getChars();
+    getUsers();
   }, []);
   const { authenticated, setAuthenticated } = useContext(LoginContext);
   return (
@@ -25,17 +23,17 @@ const Dashboard = () => {
         </h2>
         <div className="grid grid-cols-3 grid-rows-auto divide-y-2 divide-black divide-solid border-2 border-black">
           <div className="grid grid-cols-3 grid-rows-auto col-span-3 row-span-1">
-            <h2 className="">Name </h2>
-            <h2 className="">Eye Color</h2>
-            <h2 className="">Birth Year</h2>
+            <h2 className="">Email</h2>
+            <h2 className="">Username</h2>
+            <h2 className="">Password</h2>
           </div>
-          {characters.map((character, i) => (
-            <CharacterList
+          {users.map((user, i) => (
+            <UserList
               className="w-min h-min"
-              key={character.id}
-              name={character.name}
-              eyeColor={character.eyeColor}
-              birthYear={character.birthYear}
+              key={user.id}
+              email={user.email}
+              username={user.username}
+              password={user.password}
             />
           ))}
         </div>

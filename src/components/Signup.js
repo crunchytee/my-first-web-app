@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LoginContext from "../LoginContext";
 
-const Login = () => {
-  const USERNAME = /admin/;
-  const PASWORD = /password/;
+const Signup = () => {
+  const USERNAME = /^[a-z0-9_-]{3,15}$/;
+  const PASSWORD =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  const EMAIL_ADDRESS = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
   const { authenticated, setAuthenticated } = useContext(LoginContext);
   const {
     register,
@@ -33,8 +35,30 @@ const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="w-fit-content mx-auto text-xl font-medium text-black p-6">
-          Log In
+          Sign Up
         </div>
+        <label
+          htmlFor="email-address"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Email Address
+          <input
+            id="email-address"
+            className="w-100% md:w-fit-content block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Email Address"
+            {...register("email-address", {
+              required: "Email address required",
+              pattern: {
+                value: EMAIL_ADDRESS,
+                message: "Please enter a valid email address",
+              },
+            })}
+          />
+          {errors["email-address"] && (
+            <p className="text-red-500">{errors["email-address"].message}</p>
+          )}
+        </label>
+
         <label
           htmlFor="username"
           className="block text-gray-700 text-sm font-bold mb-2"
@@ -48,7 +72,8 @@ const Login = () => {
               required: "Username required",
               pattern: {
                 value: USERNAME,
-                message: "Invalid username. Try 'admin'",
+                message:
+                  "Invalid username. Try an alphanumeric string that may include _ and - having a length of 3 to 16 characters.",
               },
             })}
           />
@@ -68,8 +93,9 @@ const Login = () => {
             {...register("password", {
               required: "Password required",
               pattern: {
-                value: PASWORD,
-                message: "Invalid password. Try 'password'",
+                value: PASSWORD,
+                message:
+                  "Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character",
               },
             })}
           />
@@ -82,18 +108,12 @@ const Login = () => {
             type="submit"
             className="bg-button w-100% hover:bg-buttonHover text-white font-bold py-2 px-4 my-4 rounded "
           >
-            Submit
+            Sign Up
           </button>
         </div>
-        <p>
-          First time here?{" "}
-          <Link to="/signup" className="text-blue-500 underline">
-            Sign Up
-          </Link>
-        </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
