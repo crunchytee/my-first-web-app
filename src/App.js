@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Welcome from "./components/Welcome";
 import React, { useState } from "react";
@@ -16,6 +17,9 @@ function App() {
         <Navbar />
         <Switch>
           <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <Route path="/signup">
+            <Signup />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
