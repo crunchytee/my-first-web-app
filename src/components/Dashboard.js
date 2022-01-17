@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import LoginContext from "../LoginContext";
-import UserList from "./UserList";
+import UserList from "./UserList.js";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
+  const getUsers = async () => {
+    const response = await fetch("http://127.0.0.1:5000/all");
+    const data = await response.json();
+    console.log(data.users);
+    setUsers(data.users);
+  };
   useEffect(() => {
-    const getUsers = async () => {
-      const response = await fetch("http://127.0.0.1:5000/all");
-      const data = await response.json();
-      console.log(data.users);
-      setUsers(data.users);
-    };
     getUsers();
   }, []);
   const { authenticated, setAuthenticated } = useContext(LoginContext);
