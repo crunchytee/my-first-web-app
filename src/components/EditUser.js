@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const EditUser = (props) => {
@@ -27,7 +27,6 @@ const EditUser = (props) => {
     });
     props.setRefetch(!props.refetch);
     props.toggleModal();
-    console.log("set didsubmit changed!");
   };
 
   // Another way to do it
