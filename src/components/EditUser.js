@@ -11,29 +11,48 @@ const EditUser = (props) => {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
   // Push updates to the db on form submit / handlesubmit
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     data.email = props.email;
-    fetch("http://127.0.0.1:5000/edit", {
+    await fetch("http://127.0.0.1:5000/edit", {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    props.setRefetch(!props.refetch);
     props.toggleModal();
+    console.log("set didsubmit changed!");
   };
+
+  // Another way to do it
+  // const onSubmit = (data) => {
+  //   data.email = props.email;
+  //   fetch("http://127.0.0.1:5000/edit", {
+  //     method: "PUT",
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }).then((response) => {
+  //     props.setRefetch(!props.refetch);
+  //     props.toggleModal();
+  //     console.log("set didsubmit changed!");
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   });
+  // };
 
   //set field values
   useEffect(() => {
     setValue("username", props.username);
     setValue("password", props.password);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form
@@ -44,7 +63,7 @@ const EditUser = (props) => {
         Edit "{props.email}"
       </h2>
       <label
-        for="username"
+        htmlFor="username"
         className="block text-gray-700 text-sm font-bold mb-2"
       >
         {" "}
@@ -65,7 +84,7 @@ const EditUser = (props) => {
         )}
       </label>
       <label
-        for="password"
+        htmlFor="password"
         className="block text-gray-700 text-sm font-bold mb-2"
       >
         {" "}

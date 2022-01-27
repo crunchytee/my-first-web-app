@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
 import EditUser from "./EditUser";
 
@@ -18,12 +18,14 @@ const UserList = (props) => {
       <button className="text-left" onClick={toggleModal}>
         {props.password}
       </button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal}>
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} ariaHideApp={false}>
         <EditUser
           email={props.email}
           username={props.username}
           password={props.password}
           toggleModal={toggleModal}
+          refetch={props.refetch}
+          setRefetch={props.setRefetch}
         />
       </Modal>
     </div>
