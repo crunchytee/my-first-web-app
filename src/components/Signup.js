@@ -15,9 +15,9 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
   const history = useHistory();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    fetch("http://127.0.0.1:5000/signup", {
+    await fetch("http://127.0.0.1:5000/signup", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

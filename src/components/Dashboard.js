@@ -5,20 +5,17 @@ import UserList from "./UserList.js";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [refetch, setRefetch] = useState(false);
-  console.log("dashboard reload");
+  // console.log("dashboard reload");
   useEffect(() => {
     const getUsers = async () => {
       const response = await fetch("http://127.0.0.1:5000/all");
       const data = await response.json();
       console.log(data.users);
       setUsers(data.users);
-      console.log("all happened");
+      // console.log("all happened");
     };
-    console.log("refetch", refetch);
+    // console.log("refetch", refetch);
     getUsers();
-    // const u = [getUsers()];
-    // setUsers(u);
-    // console.log("getUsers happened via dashboard");
   }, [refetch]);
   const { authenticated, setAuthenticated } = useContext(LoginContext); // eslint-disable-line no-unused-vars
   return (
@@ -29,10 +26,11 @@ const Dashboard = () => {
           Authentication Status: {JSON.stringify(authenticated)}
         </h2>
         <div className="grid grid-cols-3 grid-rows-auto divide-y-2 divide-black divide-solid border-2 border-black">
-          <div className="grid grid-cols-3 grid-rows-auto col-span-3 row-span-1">
+          <div className="grid grid-cols-4 grid-rows-auto col-span-4 row-span-1">
             <h2 className="">Email</h2>
             <h2 className="">Username</h2>
             <h2 className="">Password</h2>
+            <h2>Options</h2>
           </div>
           {users.map((user, i) => (
             <UserList
