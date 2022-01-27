@@ -8,15 +8,15 @@ const Welcome = () => {
           <h1 className="block p-6 w-fit-content">
             This is the welcome page. Welcome to my page. I hope you like it
             here.{" "}
-            <a className="underline text-blue-600">
+            <button className="underline text-blue-600">
               <Link to="/login">Log In</Link>
-            </a>
+            </button>
           </h1>
           <h1 className="block p-6 w-fit-content">
             Looking for the{" "}
-            <a className="underline text-blue-600">
+            <button className="underline text-blue-600">
               <Link to="/dashboard">Dashboard?</Link>
-            </a>
+            </button>
           </h1>
         </div>
       </div>

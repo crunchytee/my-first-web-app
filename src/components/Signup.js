@@ -8,11 +8,10 @@ const Signup = () => {
   const PASSWORD =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
   const EMAIL_ADDRESS = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
-  const { authenticated, setAuthenticated } = useContext(LoginContext);
+  const { authenticated, setAuthenticated } = useContext(LoginContext); // eslint-disable-line no-unused-vars
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
   const history = useHistory();

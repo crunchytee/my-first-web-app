@@ -1,19 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import LoginContext from "../LoginContext";
-import UserList from "./UserList";
+import UserList from "./UserList.js";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
+  const [refetch, setRefetch] = useState(false);
+  console.log("dashboard reload");
   useEffect(() => {
     const getUsers = async () => {
       const response = await fetch("http://127.0.0.1:5000/all");
       const data = await response.json();
       console.log(data.users);
       setUsers(data.users);
+      console.log("all happened");
     };
+    console.log("refetch", refetch);
     getUsers();
-  }, []);
-  const { authenticated, setAuthenticated } = useContext(LoginContext);
+    // const u = [getUsers()];
+    // setUsers(u);
+    // console.log("getUsers happened via dashboard");
+  }, [refetch]);
+  const { authenticated, setAuthenticated } = useContext(LoginContext); // eslint-disable-line no-unused-vars
   return (
     <div className="">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -34,6 +41,8 @@ const Dashboard = () => {
               email={user.email}
               username={user.username}
               password={user.password}
+              refetch={refetch}
+              setRefetch={setRefetch}
             />
           ))}
         </div>

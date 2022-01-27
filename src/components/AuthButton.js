@@ -8,7 +8,7 @@ const AuthButton = (props) => {
 
   if (authenticated) {
     return (
-      <div className={props.style}>
+      <div className={props.className}>
         <Link
           to="/"
           onClick={(e) => {
@@ -21,7 +21,7 @@ const AuthButton = (props) => {
     );
   } else {
     return (
-      <div className={props.style}>
+      <div className={props.className}>
         <Link to="/login">Log In</Link>
       </div>
     );

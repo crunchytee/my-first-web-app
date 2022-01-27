@@ -6,11 +6,10 @@ import LoginContext from "../LoginContext";
 const Login = () => {
   const USERNAME = /admin/;
   const PASWORD = /password/;
-  const { authenticated, setAuthenticated } = useContext(LoginContext);
+  const { authenticated, setAuthenticated } = useContext(LoginContext); // eslint-disable-line no-unused-vars
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
   const history = useHistory();

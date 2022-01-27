@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal/lib/components/Modal";
+import EditUser from "./EditUser";
 
 const UserList = (props) => {
-  //border-2 border-black
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
   return (
-    <>
-      <h2 className="col-span-1 row-span-1">{props.email}</h2>
-      <h2 className="col-span-1 row-span-1">{props.username}</h2>
-      <h2 className="col-span-1 row-span-1">{props.password}</h2>
-    </>
+    <div className="grid grid-cols-3 grid-rows-auto col-span-3 row-span-1">
+      <h2 className="">{props.email}</h2>
+      <button className="text-left" onClick={toggleModal}>
+        {props.username}
+      </button>
+      <button className="text-left" onClick={toggleModal}>
+        {props.password}
+      </button>
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} ariaHideApp={false}>
+        <EditUser
+          email={props.email}
+          username={props.username}
+          password={props.password}
+          toggleModal={toggleModal}
+          refetch={props.refetch}
+          setRefetch={props.setRefetch}
+        />
+      </Modal>
+    </div>
   );
 };
 

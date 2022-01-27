@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="btn-header">
           <Link to="/">Home</Link>
         </div>
-        <AuthButton style="btn-header" />
+        <AuthButton className="btn-header" />
       </div>
     </nav>
   );
