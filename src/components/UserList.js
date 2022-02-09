@@ -22,7 +22,7 @@ const UserList = (props) => {
         {props.username}
       </button>
       <button className="text-left" onClick={toggleEditModal}>
-        {props.password}
+        {props.password.substring(0, 25)}...
       </button>
       <Modal
         isOpen={isEditOpen}

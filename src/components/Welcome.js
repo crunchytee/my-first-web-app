@@ -18,6 +18,12 @@ const Welcome = () => {
               <Link to="/dashboard">Dashboard?</Link>
             </button>
           </h1>
+          <h1 className="block p-6 w-fit-content">
+            First time here?{" "}
+            <Link to="/signup" className="text-blue-500 underline">
+              Sign Up
+            </Link>
+          </h1>
         </div>
       </div>
     </div>

@@ -13,15 +13,17 @@ const Login = () => {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
   const history = useHistory();
-  const onSubmit = (data) => {
-    console.log(data);
-    // fetch("http://127.0.0.1:5000/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+  const onSubmit = async (data) => {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response.status);
+
+    //TODO: Implement response checking / conditions based on status code
     setAuthenticated(true);
     history.push("/dashboard");
   };
@@ -35,24 +37,25 @@ const Login = () => {
           Log In
         </div>
         <label
-          htmlFor="username"
+          htmlFor="email-address"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
-          Username
+          Email Address
           <input
-            id="username"
+            id="email-address"
             className="w-100% md:w-fit-content block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Username"
-            {...register("username", {
-              required: "Username required",
-              pattern: {
-                value: USERNAME,
-                message: "Invalid username. Try 'admin'",
-              },
+            placeholder="Email Address"
+            {...register("email-address", {
+              required: "Email Address required",
+              // There is no pattern
+              // pattern: {
+              //   value: USERNAME,
+              //   message: "Invalid email address",
+              // },
             })}
           />
-          {errors["username"] && (
-            <p className="text-red-500">{errors["username"].message}</p>
+          {errors["email-address"] && (
+            <p className="text-red-500">{errors["email-address"].message}</p>
           )}
         </label>
         <label
@@ -66,10 +69,11 @@ const Login = () => {
             placeholder="Password"
             {...register("password", {
               required: "Password required",
-              pattern: {
-                value: PASWORD,
-                message: "Invalid password. Try 'password'",
-              },
+              //There is no pattern
+              // pattern: {
+              //   value: PASWORD,
+              //   message: "Invalid password. Try 'password'",
+              // },
             })}
           />
           {errors["password"] && (
