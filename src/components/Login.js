@@ -1,30 +1,60 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, Link } from "react-router-dom";
 import LoginContext from "../LoginContext";
+import Modal from "react-modal/lib/components/Modal";
 
 const Login = () => {
   const USERNAME = /admin/;
   const PASWORD = /password/;
   const { authenticated, setAuthenticated } = useContext(LoginContext); // eslint-disable-line no-unused-vars
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("Nothing!");
+
+  // React hook form initiation
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
+
+  // Setup history for submit
   const history = useHistory();
-  const onSubmit = (data) => {
-    console.log(data);
-    // fetch("http://127.0.0.1:5000/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    setAuthenticated(true);
-    history.push("/dashboard");
+
+  // Handle submit
+  const onSubmit = async (data) => {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).catch((error) => {
+      setErrorMessage("Something went wrong on our end...");
+      toggleModal();
+      return false;
+    });
+
+    // Reroute on success/unsuccess.
+    // This is great but it doesn't work when the request doesn't return a response at all (server not online)
+    // .catch() above handles no response
+    if (response.status === 200) {
+      setAuthenticated(true);
+      history.push("/dashboard");
+    } else if (response.status === 401) {
+      history.push("/login");
+      setErrorMessage(
+        "That wasn't quite right. Are you who you say you are, or are you just forgetting your credentials?"
+      );
+      toggleModal();
+    } else {
+      setErrorMessage("Something went wrong on our end...");
+      toggleModal();
+    }
   };
+  function toggleModal() {
+    setIsModalOpen(!isModalOpen);
+  }
   return (
     <div className="md:w-fit-content md:mx-auto">
       <form
@@ -35,24 +65,25 @@ const Login = () => {
           Log In
         </div>
         <label
-          htmlFor="username"
+          htmlFor="email-address"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
-          Username
+          Email Address
           <input
-            id="username"
+            id="email-address"
             className="w-100% md:w-fit-content block shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Username"
-            {...register("username", {
-              required: "Username required",
-              pattern: {
-                value: USERNAME,
-                message: "Invalid username. Try 'admin'",
-              },
+            placeholder="Email Address"
+            {...register("email-address", {
+              required: "Email Address required",
+              // There is no pattern
+              // pattern: {
+              //   value: USERNAME,
+              //   message: "Invalid email address",
+              // },
             })}
           />
-          {errors["username"] && (
-            <p className="text-red-500">{errors["username"].message}</p>
+          {errors["email-address"] && (
+            <p className="text-red-500">{errors["email-address"].message}</p>
           )}
         </label>
         <label
@@ -66,10 +97,11 @@ const Login = () => {
             placeholder="Password"
             {...register("password", {
               required: "Password required",
-              pattern: {
-                value: PASWORD,
-                message: "Invalid password. Try 'password'",
-              },
+              //There is no pattern
+              // pattern: {
+              //   value: PASWORD,
+              //   message: "Invalid password. Try 'password'",
+              // },
             })}
           />
           {errors["password"] && (
@@ -91,6 +123,23 @@ const Login = () => {
           </Link>
         </p>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={toggleModal}
+        ariaHideApp={false}
+      >
+        <div className="w-fit-content mx-auto text-xl font-medium text-black p-6">
+          {errorMessage}
+        </div>
+        <div className="mx-auto md:w-fit-content">
+          <button
+            onClick={toggleModal}
+            className="bg-button w-100% hover:bg-buttonHover text-white font-bold py-2 px-4 my-4 rounded "
+          >
+            Try Again
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

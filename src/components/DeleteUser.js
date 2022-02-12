@@ -1,5 +1,3 @@
-import { useState } from "react/cjs/react.development";
-
 const DeleteUser = (props) => {
   // Push updates to the db on form submit / handlesubmit
   const onSubmit = async () => {
