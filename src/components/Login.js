@@ -29,11 +29,15 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json",
       },
+    }).catch((error) => {
+      setErrorMessage("Something went wrong on our end...");
+      toggleModal();
+      return false;
     });
-    console.log(`Response status: ${response.status}`);
 
     // Reroute on success/unsuccess.
     // This is great but it doesn't work when the request doesn't return a response at all (server not online)
+    // .catch() above handles no response
     if (response.status === 200) {
       setAuthenticated(true);
       history.push("/dashboard");
