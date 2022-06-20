@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import AuthButton from "./AuthButton";
+import CryptoAuth from "../Auth/CryptoAuth";
 
 const Navbar = () => {
   return (
@@ -14,7 +14,8 @@ const Navbar = () => {
         <div className="btn-header">
           <Link to="/">Home</Link>
         </div>
-        <AuthButton className="btn-header" />
+        {/* <AuthButton className="btn-header" /> */}
+        <CryptoAuth className="btn-header" />
       </div>
     </nav>
   );
