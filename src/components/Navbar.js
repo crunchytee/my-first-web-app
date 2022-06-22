@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import CryptoAuth from "../Auth/CryptoAuth";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+import CryptoAuth from '../Auth/CryptoAuth';
 
 const Navbar = () => {
   return (
