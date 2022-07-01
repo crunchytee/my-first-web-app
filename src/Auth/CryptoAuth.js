@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ethers } from 'ethers';
 
 const CryptoAuth = () => {
@@ -16,9 +16,9 @@ const CryptoAuth = () => {
     );
   };
 
-  // window.ethereum.on('accountsChanged', async () => {
-  //   await login();
-  // });
+  window.ethereum.on('accountsChanged', async () => {
+    await login();
+  });
 
   return (
     <button onClick={login}>
