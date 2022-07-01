@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import { DriverProvider } from './DriverContext';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DriverProvider>
+      <App />
+    </DriverProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

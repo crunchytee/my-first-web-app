@@ -1,28 +1,37 @@
-import { useState } from 'react';
-import { ethers } from 'ethers';
+import { useState, useContext, useEffect } from 'react';
+import { DriverContext } from '../DriverContext';
+import { useDriverAuth } from '../hooks/useDriverAuth';
 
 const CryptoAuth = () => {
-  const [signerAddress, setSignerAddress] = useState('');
+  const [driverAddress, setDriverAddress] = useState('');
 
-  const login = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signerAddress = await provider.send('eth_requestAccounts', []);
-    // Isolates the first several charactors of user's address
-    const addressBegining = signerAddress[0].substring(0, 4);
-    // Isolates the last several charactors of user's address
-    const addressEnd = signerAddress[0].substring(37, 42);
-    setSignerAddress(
-      addressBegining.concat('.'.padEnd(6, '.')).concat(addressEnd)
-    );
-  };
+  const [authedDriver, setAuthedDriver] = useContext(DriverContext);
+
+  const { driverStatus, authDriver } = useDriverAuth();
 
   window.ethereum.on('accountsChanged', async () => {
-    await login();
+    setAuthedDriver(await driverStatus());
   });
 
+  useEffect(() => {
+    driverStatus();
+    if (authedDriver.authed) {
+      document.getElementById('login-btn').disabled = true;
+      // Isolates the first four characters of the dirver's address
+      const addressBegining = authedDriver.driverAddress.substring(0, 4);
+      // Isolates the last five characters of driver's address
+      const addressEnd = authedDriver.driverAddress.substring(37, 42);
+      setDriverAddress(
+        addressBegining.concat('.'.padEnd(6, '.').concat(addressEnd))
+      );
+    } else {
+      document.getElementById('login-btn').disabled = false;
+    }
+  }, [driverStatus, authedDriver.authed, authedDriver.driverAddress]);
+
   return (
-    <button onClick={login}>
-      {signerAddress !== '' ? signerAddress : 'Login'}
+    <button id="login-btn" onClick={authDriver}>
+      {authedDriver.authed ? driverAddress : 'Login'}
     </button>
   );
 };

@@ -1,33 +1,28 @@
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import Welcome from './components/Welcome';
-import { useState } from 'react';
-import LoginContext from './LoginContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
   return (
-    <LoginContext.Provider value={{ authenticated, setAuthenticated }}>
-      <Router>
-        <Navbar />
-        <Switch>
-          <ProtectedRoute path="/dashboard" component={Dashboard} />
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <Welcome />
-          </Route>
-        </Switch>
-      </Router>
-    </LoginContext.Provider>
+    <Router>
+      <Navbar />
+      <Switch>
+        <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <Welcome />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
